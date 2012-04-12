@@ -12,13 +12,16 @@
         jQuery.post('/feinheit/thumbnail/',
             {'id': this.value, 'width': 188, 'height': 142},
             function(data){
-                   field.parent('div').css('background-image', 'url('+data['url']+')');
+                   field.parent('div')
+                    .css('background-image', 'url('+data['url']+')')
+                    .css('background-repeat', 'no-repeat')
+                    .css('height', '120px');
 				   field.prev('p.admin-gallery-image-caption').text(data['name']);
             }, 'json');
     }
-	
+
     var LoupeClicked; // global placeholder for input field
-    
+
 	// wrapper for the django dismissRelatedLookup function that triggers an event on change.
 	var sendTrigger = function(fn){
 		return function(win, chosenId){
@@ -26,8 +29,8 @@
             LoupeClicked.trigger('blur');
 		};
 	};
-	dismissRelatedLookupPopup = sendTrigger(dismissRelatedLookupPopup);	
-	
+	dismissRelatedLookupPopup = sendTrigger(dismissRelatedLookupPopup);
+
     (function($){
         $(function(){
             $('.image-fk').each(function(){
